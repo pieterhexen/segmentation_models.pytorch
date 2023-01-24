@@ -27,6 +27,12 @@ class SegmentationModel(torch.nn.Module):
         self.check_input_shape(x)
 
         features = self.encoder(x)
+        
+        # Add Dropout for Gaussian Dropout
+        if self.eval():
+            d = torch.nn.Dropout(p=.2)
+            features = d(features)
+
         decoder_output = self.decoder(*features)
 
         masks = self.segmentation_head(decoder_output)
