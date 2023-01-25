@@ -26,6 +26,7 @@ def create_model(
     encoder_weights: _Optional[str] = "imagenet",
     in_channels: int = 3,
     classes: int = 1,
+    dropout: bool = False,
     **kwargs,
 ) -> _torch.nn.Module:
     """Models entrypoint, allows to create any model architecture just with
@@ -58,5 +59,6 @@ def create_model(
         encoder_weights=encoder_weights,
         in_channels=in_channels,
         classes=classes,
+        dropout=dropout,
         **kwargs,
     )

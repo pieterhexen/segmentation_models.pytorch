@@ -29,7 +29,7 @@ class SegmentationModel(torch.nn.Module):
         features = self.encoder(x)
         
         # Add Dropout for Gaussian Dropout
-        if self.eval():
+        if self.eval() & self.dropout:
             d = torch.nn.Dropout(p=.2)
             features = d(features)
 

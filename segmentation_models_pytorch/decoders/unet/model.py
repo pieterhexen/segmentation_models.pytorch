@@ -59,6 +59,7 @@ class Unet(SegmentationModel):
         encoder_depth: int = 5,
         encoder_weights: Optional[str] = "imagenet",
         decoder_use_batchnorm: bool = True,
+        dropout: bool = False,
         decoder_channels: List[int] = (256, 128, 64, 32, 16),
         decoder_attention_type: Optional[str] = None,
         in_channels: int = 3,
@@ -95,6 +96,7 @@ class Unet(SegmentationModel):
             self.classification_head = ClassificationHead(in_channels=self.encoder.out_channels[-1], **aux_params)
         else:
             self.classification_head = None
-
+            
+        self.dropout = dropout
         self.name = "u-{}".format(encoder_name)
         self.initialize()
